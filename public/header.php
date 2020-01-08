@@ -23,7 +23,10 @@
         <div class="w3-right w3-hide-small">
             <a href="#about" class="w3-bar-item w3-button">About</a>
             <a href="#menu" class="w3-bar-item w3-button">Menu</a>
-            <a href="#contact" class="w3-bar-item w3-button">User</a>
+            <a href="Account.php" class="w3-bar-item w3-button">Account</a>
+            <a href="Basket.php" class="w3-bar-item w3-button">Basket</a>
         </div>
     </div>
 </div>
+</body>
+</html>

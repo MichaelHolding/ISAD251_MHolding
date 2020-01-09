@@ -36,7 +36,7 @@ class dbContext
         {
             foreach($resultSet as $row)
             {
-                $item =  new product($row['Item_No'], $row['Item_Name'], $row['Item_Desc'], $row['Item_Type'], $row['price'], $row['stock'],$row['Out_Of_Stock']);
+                $item =  new item($row['Item_No'], $row['Item_Name'], $row['Item_Desc'], $row['Item_Type'], $row['price'], $row['stock'],$row['Out_Of_Stock']);
                 $items= $item;
             }
         }

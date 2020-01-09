@@ -3,6 +3,7 @@ include_once "header.php"
 ?>
 <!doctype HTML>
 <!-- Page content -->
+<!--see readme document for template references-->
 <div class="w3-content" style="max-width:1100px">
 
   <!-- About Section -->
@@ -23,6 +24,9 @@ include_once "header.php"
   <div class="w3-row w3-padding-64" id="menu">
     <div class="w3-col l6 w3-padding-large">
       <h1 class="w3-center">Our Menu</h1><br>
+      <select class="w3-center w3-col 10">
+
+      </select>
 
 
     </div>
@@ -34,10 +38,9 @@ include_once "header.php"
 
   <hr>
 
-  <!-- Contact Section -->
   <div class="w3-container w3-padding-64" id="contact">
     <h1>Contact</h1><br>
-    <p>If you have issues with the app or your order do not hesitated to contact us on phone 00553123-2323 or email lepub@pub.com</p>
+    <p>If you have issues with the website or your order do not hesitated to contact us on phone 00553123-2323 or email lepub@pub.com</p>
   </div>
 <?php
 include_once "footer.php"

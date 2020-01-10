@@ -1,0 +1,71 @@
+CREATE TABLE `user`
+(
+    `User_No` INT NOT NULL PRIMARY KEY,
+    `Name` VARCHAR(25) NOT NULL,
+    `Email` VARCHAR(50) NOT NULL
+    
+);
+
+
+CREATE TABLE `Orders`
+(
+    `Order_No` INT NOT NULL PRIMARY KEY, 
+    `User_No` INT NOT NULL,
+    `Table_No` INT NOT NULL,
+    FOREIGN KEY (User_No) REFERENCES user(User_No)
+
+);
+
+
+CREATE TABLE `item`
+(
+    `Item_No` INT NOT NULL PRIMARY KEY,
+    `Item_Name` VARCHAR(20) NOT NULL,
+    `Item_Desc` VARCHAR(60) NOT NULL,
+    `Item_Type` VARCHAR(10) NOT NULL,
+    `Price` VARCHAR(8) NOT NULL,
+    `Stock` INT NULL,
+    `Out_Of_Stock` BIT NOT NULL
+    
+
+);
+
+CREATE TABLE `Order_Details`
+(
+    `Order_No` INT NOT NULL,
+    `Item_No` INT NOT NULL,
+    `Quantity` INT NOT NULL,
+    PRIMARY KEY (Order_No, Item_No),
+    FOREIGN KEY (Order_No) REFERENCES Orders(Order_No),
+    FOREIGN KEY (Item_No) REFERENCES item(Item_No)
+
+   
+
+);
+
+Procedures
+
+AddOrder
+
+BEGIN
+INSERT INTO `orders`
+(`Order_No`,`User_No`,`Table_No`)
+VALUES (`Order_No`,`User_No`,`Table_No`);
+END
+
+AddOrderContents
+
+BEGIN
+	INSERT INTO `order_contents`
+    (`Order_No`, `Item_No`,`Quantity`)
+    VALUES (`Order_No`, `Item_No`,`Quantity`);
+    END
+
+
+AddUser
+
+BEGIN
+	INSERT INTO `user`
+    (`User_No` , `Name`, `Email`)
+    VALUES (`User_No` , `Name`, `Email`);
+    END

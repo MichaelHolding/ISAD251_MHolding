@@ -6,8 +6,13 @@ include_once  "../SRC/model/users.php";
 include_once  "../SRC/model/order_details.php";
 include_once  "../SRC/model/orders.php";
 
+
 if(!isset($db)) {
     $db = new dbContext();
+}
+function getCurrentOrder(){
+    $currentOrder = $_POST['orderNumberIn'];
+    return $currentOrder;
 }
 if (isset($_POST['submit'])) {
 
@@ -22,6 +27,7 @@ if (isset($_POST['submit'])) {
 
     $submitItem = new orderDetails($_POST['itemTable'],$orderNo,$_POST['quantity']);
     $db->enterOrder_Details($submitItem);
+    getCurrentOrder();
 }
 
 ?>
@@ -51,7 +57,7 @@ if (isset($_POST['submit'])) {
       <h1 class="w3-center">Our Menu</h1><br>
 
         <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-            <label for="food">Food</label>
+            <label for="Item">Item</label>
             <br>
             <select id="itemTable" class="form-control" name="itemTable">
                 <option>--Select Item--</option>
@@ -66,6 +72,7 @@ if (isset($_POST['submit'])) {
                 }
                 echo $listItem;
                 ?>
+                <label for="quantity">Quantity</label>
                 <input type="text" name="quantity">
             </select>
 
@@ -73,9 +80,7 @@ if (isset($_POST['submit'])) {
 
     </div>
 
-    <div class="w3-col l6 w3-padding-large">
 
-    </div>
   </div>
 
   <hr>
@@ -85,8 +90,33 @@ if (isset($_POST['submit'])) {
         Email: <input type="text" name="email">
         <input name="submit" id="submit" onclick="" type="submit" value="Order">
 
-    </form>
+
 </div>
+    <div class="w3-col l6 w3-padding-large">
+        <input type="text" name="orderNumberIn">
+        <input name="submitOrderIn" id="submitOrderIn" type="submit">
+
+        <?php
+        $currentOrder = $db->getLastOrder();
+        $className=1;
+
+        if($currentOrder)
+        {
+            foreach ($currentOrder as $items)
+            {
+                $listOrder.="<div class=item".$className.">".
+                    "<h5 id=price>".$items->getPrice()."</h5>".
+                    "<h1 class='font-weight-bold'>".$items->getItemName()." x ".$items->getQuantity()."</h1>".
+                    "</h4>"."</div>";
+                $className += 1;
+            }
+        }
+        echo  $listOrder;
+
+        ?>
+
+    </div>
+</form>
 
   <div class="w3-container w3-padding-64" id="contact">
     <h1>Contact</h1><br>

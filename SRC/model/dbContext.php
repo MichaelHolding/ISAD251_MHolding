@@ -3,6 +3,8 @@ include_once 'item.php';
 include_once  'users.php';
 include_once 'order_details.php';
 include_once  'orders.php';
+include_once 'currentOrder.php';
+
 class dbContext
 {
     private  $db_server = 'Proj-mysql.uopnet.plymouth.ac.uk';
@@ -100,5 +102,23 @@ class dbContext
         $statement->bindParam(':Quantity', $orderDetails->getQuantity(), PDO::PARAM_INT);
         $orderDetails = $statement->execute();
         return $orderDetails;
+    }
+    public function getLastOrder(){
+        $sql="SELECT item.Item_No, item.Item_Name,item.Price, order_contents.Quantity FROM `order_contents`, `item` WHERE `Order_No`=".getCurrentOrder()." AND `item`.`Item_No` = order_contents.Item_No ";
+
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        $selectedSet = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+        $itemsToDisplay = [];
+        if ($selectedSet) {
+            foreach ($selectedSet as $row) {
+                $lastOrder = new currentOrder($row['Item_No'], $row['Item_Name'], $row['Price'], $row['Quantity']);
+                $itemsToDisplay[] = $lastOrder;
+            }
+        }
+        return $itemsToDisplay;
+
     }
     }
